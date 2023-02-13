@@ -1,14 +1,17 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-type ProcessMetadata = {
-  id: string;
-  name: string;
-  description: string;
-  anchors: {
-    teams?: Array<string>;
-    users?: Array<string>;
-    relatedTerms?: Array<string>;
-    domains?: Array<string>;
+type ProcessMetadataCreate = {
+  md: {
+    id: string;
+    name: string;
+    description: string;
+    iconUrl: string;
+    anchors: {
+      teams?: Array<string>;
+      users?: Array<string>;
+      relatedTerms?: Array<string>;
+      domains?: Array<string>;
+    };
   };
 };
 
@@ -24,7 +27,7 @@ export const processesMetadataApi = createApi({
     getAllProcessesMetadata: builder.query<any, void>({
       query: () => `process-metadata`,
     }),
-    addProcessMetadata: builder.mutation<ProcessMetadata, Partial<ProcessMetadata>>({
+    addProcessMetadata: builder.mutation<ProcessMetadataCreate, Partial<ProcessMetadataCreate>>({
       query: (body) => ({
         url: `process-metadata`,
         method: 'POST',
@@ -42,4 +45,5 @@ export const processesMetadataApi = createApi({
   }),
 });
 
-export const { useGetAllProcessesMetadataQuery } = processesMetadataApi;
+export const { useGetAllProcessesMetadataQuery, useAddProcessMetadataMutation, useDeleteProcessMetadataMutation } =
+  processesMetadataApi;
