@@ -1,6 +1,6 @@
-import React from "react";
-import { useGetAllProcessesMetadataQuery } from "../api/processes-metadata";
-import { Box, Text, Card, CardBody, CardHeader, Heading, HStack } from "@chakra-ui/react";
+import React from 'react';
+import { useGetAllProcessesMetadataQuery } from '../api/processes-metadata';
+import { Box, Text, Card, CardBody, CardHeader, Heading, HStack, CardFooter, Button } from '@chakra-ui/react';
 
 type MDSType = {
   id: string;
@@ -15,13 +15,16 @@ const ProcessCard = ({ process }: any) => {
   const { name, description } = process;
 
   return (
-    <Card minW={290}>
+    <Card w={300} maxW={300} maxH={300} my={5}>
       <CardHeader>
         <Heading size="md">{name}</Heading>
       </CardHeader>
       <CardBody>
-        <Text>{description}</Text>
+        <Text textOverflow="ellipsis">{description}</Text>
       </CardBody>
+      <CardFooter>
+        <Button>Delete</Button>
+      </CardFooter>
     </Card>
   );
 };
@@ -34,10 +37,15 @@ export const ProcessesContainer = () => {
   return isLoading ? (
     <Box>Loading...</Box>
   ) : (
-    <HStack>
-      {processes.mds.map((item: MDSType, index: number) => (
-        <ProcessCard key={index} process={item} />
-      ))}
-    </HStack>
+    <>
+      <Heading as="h2" size="xl">
+        My processes
+      </Heading>
+      <HStack flexWrap="wrap">
+        {processes.mds.map((item: MDSType, index: number) => (
+          <ProcessCard key={index} process={item} />
+        ))}
+      </HStack>
+    </>
   );
 };
