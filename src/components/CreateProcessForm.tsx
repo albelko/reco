@@ -18,24 +18,29 @@ export function CreateProcessForm() {
   const [addProcessMetadata, { isLoading }] = useAddProcessMetadataMutation();
 
   const handleSubmit = (event: any) => {
-    addProcessMetadata({
-      md: {
-        id: uuidv4(),
-        name,
-        iconUrl: 'iconUrl',
-        description,
-        anchors: {
-          teams,
-          users,
-          relatedTerms: terms,
-          domains,
+    if (name.length) {
+      addProcessMetadata({
+        md: {
+          id: uuidv4(),
+          name,
+          iconUrl: 'iconUrl',
+          description,
+          anchors: {
+            teams,
+            users,
+            relatedTerms: terms,
+            domains,
+          },
         },
-      },
-    }).then((data) => {
-      setName('');
-      setDescription('');
-      setTeams([]);
-    });
+      }).then((data) => {
+        setName('');
+        setDescription('');
+        setTeams([]);
+        setUsers([]);
+        setDomains([]);
+        setTerms([]);
+      });
+    }
   };
 
   return isLoading ? (

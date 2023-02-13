@@ -11,16 +11,21 @@ function App() {
     <Container maxW="full" p={0} bgColor="#E5E5E5">
       <HStack w="full" alignItems="flex-start">
         <SideBarComponent />
+
         <VStack w="full">
           <HStack w="full" bgColor="#FFFFFF" p={5}>
-            <Box w="full">Process library</Box>
+            <Box w="full" data-testid="header-title">
+              Process library
+            </Box>
             <HStack w="full" flexDirection="row-reverse">
               <Box>
                 <ReactIcon />
               </Box>
+
               <DatePickerComponent />
             </HStack>
           </HStack>
+
           <Box w="full" p={5}>
             <Toolbar />
             <ProcessesContainer />
